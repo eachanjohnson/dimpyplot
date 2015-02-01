@@ -8,6 +8,7 @@ A Python frontend to the LigPlot+ program, allowing batch processing of Protein 
 4. Ability to 'cd' in the Terminal
 
 # How to Use
-1. Copy the file to the directory containing the PDB files you want to process (the working directory), or your $PATH.
-2. In the Terminal, cd to the working directory.
-3. Do 'python dimpyplot.py'
+1. Copy dimpyplot.py to the directory containing the PDB files you want to process (the working directory), or your $PATH.
+2. Edit lines 6 and 7 to tell dimpyplot.py where to find LigPlus on your computer. If you are running Mac OS X and your LigPlus folder is in /Applications, then you will not need to change this.
+3. In the Terminal, cd to the working directory.
+4. Do 'python dimpyplot.py'
