@@ -2,35 +2,37 @@
 
 import subprocess
 
+### Define LigPlot+ environment here
+components_cif = '/Applications/LigPlus/lib/params/components.cif' # Location of components.cif
+ligplot_plus = '/Applications/LigPlus/lib/exe_mac/' # Location of your LigPlus executable folder
+
 def dimplot(filename):
 	"""Emulates running the LigPlot+ DIMPLOT algorithm. Rewriting as a CLI to allow for a batch mode."""
 	file_prefix = filename.strip('.pdb')[0]
 
 	# Run HBadd
-	subprocess.check_call(['hbadd', filename,
-	'/Applications/LigPlus/lib/params/components.cif', # change this line to match your components.cif location
-	'-wkdir', './'], shell = False)
+	subprocess.check_call(['{}hbadd'.format(ligplot_plus), filename, components_cif, '-wkdir', './'], shell = False)
 
 
 	# Run HBplus
-	subprocess.check_call(['hbplus', '-L', '-h', '2.90', '-d', '3.90', '-N', filename, '-wkdir', './'], shell = False)
+	subprocess.check_call(['{}hbplus'.format(ligplot_plus), '-L', '-h', '2.90', '-d', '3.90', '-N', filename, '-wkdir', './'], shell = False)
 
 
 	# Run HBplus again
-	subprocess.check_call(['hbplus', '-L', '-h', '2.70', '-d', '3.35', filename, '-wkdir', './'], shell = False)
+	subprocess.check_call(['{}hbplus'.format(ligplot_plus), '-L', '-h', '2.70', '-d', '3.35', filename, '-wkdir', './'], shell = False)
 
 
 	# Run dimer
-	subprocess.check_call(['dimer', filename, 'A', 'C'], shell = False)
+	subprocess.check_call(['{}dimer'.format(ligplot_plus), filename, 'A', 'C'], shell = False)
 
 
 	# Run dimhtml
-	subprocess.check_call(['dimhtml', 'none', '-dimp', '-dir', './', '-flip', '-ctype', '1'], shell = False)
+	subprocess.check_call(['{}dimhtml'.format(ligplot_plus), 'none', '-dimp', '-dir', './', '-flip', '-ctype', '1'], shell = False)
 
 
 	# Run ligplot
 	subprocess.check_call([
-		'ligplot', 'dimplot.pdb', '-wkdir', './',
+		'{}ligplot'.format(ligplot_plus), 'dimplot.pdb', '-wkdir', './',
 		'-prm', '/Applications/LigPlus/lib/params/dimplot.prm', '-ctype', '1'
 		], shell = False)
 
