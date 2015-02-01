@@ -5,6 +5,7 @@ A Python frontend to the LigPlot+ program, allowing batch processing of Protein 
 1. UNIX / Linux / MacOS X
 2. Python 2.7
 3. LigPlot+ from the EBI: http://www.ebi.ac.uk/thornton-srv/software/LigPlus/
+4. components.cif from the PDB: ftp://ftp.wwpdb.org/pub/pdb/data/monomers/components.cif
 4. Ability to 'cd' in the Terminal
 
 # How to Use
