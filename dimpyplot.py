@@ -6,6 +6,10 @@ import subprocess
 components_cif = '/Applications/LigPlus/lib/params/components.cif' # Location of components.cif
 ligplot_plus = '/Applications/LigPlus/lib/exe_mac/' # Location of your LigPlus executable folder
 
+### Define the chains you want to process here
+chain1 = 'A'
+chain2 = 'B'
+
 def dimplot(filename):
 	"""Emulates running the LigPlot+ DIMPLOT algorithm. Rewriting as a CLI to allow for a batch mode."""
 	file_prefix = filename.strip('.pdb')[0]
@@ -23,7 +27,7 @@ def dimplot(filename):
 
 
 	# Run dimer
-	subprocess.check_call(['{}dimer'.format(ligplot_plus), filename, 'A', 'C'], shell = False)
+	subprocess.check_call(['{}dimer'.format(ligplot_plus), filename, chain1, chain2], shell = False)
 
 
 	# Run dimhtml
